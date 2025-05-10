@@ -2,21 +2,18 @@ import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import css from './ImageModal.module.css';
 
-// Потрібно зв'язати модальне вікно з кореневим елементом
 Modal.setAppElement('#root');
 
 const ImageModal = ({ isOpen, onRequestClose, image }) => {
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') {
-        onRequestClose();  // Закрити модальне вікно при натисканні ESC
+        onRequestClose();
       }
     };
-
     window.addEventListener('keydown', handleEsc);
-    
     return () => {
-      window.removeEventListener('keydown', handleEsc);  // Очистка
+      window.removeEventListener('keydown', handleEsc);
     };
   }, [onRequestClose]);
 
@@ -26,11 +23,17 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       onRequestClose={onRequestClose}
       className={css.modalContent}
       overlayClassName={css.overlay}
-      closeTimeoutMS={300}  // Плавне закриття
+      closeTimeoutMS={300}
     >
       <div className={css.modalWrapper}>
-        <img src={image?.largeImageURL} alt={image?.tags} className={css.modalImage} />
-        <button onClick={onRequestClose} className={css.closeButton}>Закрити</button>
+        <img
+          src={image?.urls?.regular}
+          alt={image?.alt_description || 'image'}
+          className={css.modalImage}
+        />
+        <button onClick={onRequestClose} className={css.closeButton}>
+          Закрити
+        </button>
       </div>
     </Modal>
   );

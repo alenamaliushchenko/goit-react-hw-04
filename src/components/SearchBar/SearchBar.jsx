@@ -11,7 +11,6 @@ const SearchBar = ({ onSubmit }) => {
             return;
         }
         onSubmit(query);
-        e.target.reset();
     };
     return(
         <header className={css.header}>
@@ -32,4 +31,4 @@ const SearchBar = ({ onSubmit }) => {
     );    
 };
     
-export default SearchBar
+export default SearchBar;
